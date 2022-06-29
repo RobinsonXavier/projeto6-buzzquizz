@@ -86,6 +86,7 @@ p {
     border-radius: 10px;
     position: relative;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1)40%, rgba(0, 0, 0, 0.9) 80%), url('../imagens/piratinhaQueEstica.jpeg');
+    background-size: cover;
 
 }
 .listaQuizzes p {
