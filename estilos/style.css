@@ -262,17 +262,15 @@ h4{
 .create_quizz{
     /* background-color: yellow; */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    
-    height: min-content ; /*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+    justify-content: center;    
+    height: min-content ;
+
+    padding-bottom: 40px;
 }
 
 /*--------------------------------------------------------------------------------------------------------------- */
 
-.start_create{
+.start_create_container{
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -284,16 +282,14 @@ h4{
 .start_create h2 {
     text-align: center;
 }
-.create_quizz .input_box{
+.start_create_container .input_box{
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
-    /* width: 600px; */
-    
+
     padding: 25px;
-    
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
     background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
@@ -333,58 +329,129 @@ input{
 /* -------------------------------------------------------------------------------------  */
 
 
-.create_question{
-    /* display: none; */
-    background-color: blueviolet;
+.create_question_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+
     width: 600px;
 
-    padding: 25px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 5px;
+
+    display: none;
 }
 
-.create_question_box{
-    margin-top: 40px;
-
+.edit{
+    /* margin-top: 40px; */
     display: flex;
     flex-direction: column;
-    gap: 80px;
-
-}
-
-.question_1{
-
-    display: flex;
-    flex-direction: column;
-
     gap: 30px;
+
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    border-radius: 5px;
+
+
 }
 
-.question_1 div{
+.edit div{
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.question_2{
-    height: 64px;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-}
 
-.question_3{
+.pre_edit{
     height: 64px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 25px;
 }
 
-img{
+.create_quizz img{
     height: 23px;
     width: 26px;
 }
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+
+
+.decide_level_container{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    
+    width: 600px;
+    /* background-color: red; */
+    
+    display: none;
+}
+
+.mg-top-40{
+    margin-top: 40px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+
+
+.quizz_done_container{
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    display: none;
+}
+
+.quizz_done{
+    height: 266px;
+    width: 500px;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.btn-back-home{
+    border: none;
+    background-color: transparent;
+
+    font-size: 21px;
+    font-weight: 400;
+    color: #818181;
+}
+
+.btn-quizz-done{
+    width: 280px;
+}
+
+
+.fx-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-10{
+    gap: 10px;
+}
+.gap-20{
+    gap: 20px;
+}
+.gap-30{
+    gap: 30px;
+}
+.gap-40{
+    gap: 40px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------- */

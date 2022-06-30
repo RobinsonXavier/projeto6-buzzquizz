@@ -69,15 +69,16 @@
                 </div>
             </div>
         </main>
+
         
         <main class="create_quizz">
 
 
 
 
-            <div class="start_create">
+            <div class="start_create_container">
                 <h2>Comece pelo começo</h2>
-                <div class="input_box">
+                <div class="edit">
                     <input type="text" placeholder="Título do seu quizz">
                     <input type="text" placeholder="URL da imagem do seu quizz">
                     <input type="text" placeholder="Quantidade de perguntas do quizz">
@@ -89,63 +90,108 @@
             </div>
 
 
+            <div class="create_question_container">
 
+                <div>
 
-            <div class="create_question">
-
-                <h2>Crie suas perguntas</h2>
-                <div class="create_question_box">
-
-                    <div class="question_1">
-                        <div>
-                            <h4>Pergunta 1</h4>
-                            <input type="text" placeholder="Texto da pergunta">
-                            <input type="text" placeholder="Cor de fundo da pergunta">
+                    <h2>Crie suas perguntas</h2>
+                    <div>
+    
+                        <div class="edit mg-top-40">
+                            <div>
+                                <h4>Pergunta 1</h4>
+                                <input type="text" placeholder="Texto da pergunta">
+                                <input type="text" placeholder="Cor de fundo da pergunta">
+                            </div>
+    
+                            <div>
+                                <h4>Resposta correta</h4>
+                                <input type="text" placeholder="Resposta correta">
+                                <input type="text" placeholder="URL da imagem correta">
+                            </div>
+    
+                            <div>
+                                <h4>Respostas incorretas</h4>
+                                <input type="text" placeholder="Resposta incorreta 1º">
+                                <input type="text" placeholder="URL da imagem incorreta 1º">
+                                <br>
+                                <input type="text" placeholder="Resposta incorreta 2º">
+                                <input type="text" placeholder="URL da imagem incorreta 1º">
+                                <br>
+                                <input type="text" placeholder="Resposta incorreta 3º">
+                                <input type="text" placeholder="URL da imagem incorreta 3º">
+                            </div>
+    
                         </div>
-
-                        <div>
-                            <h4>Resposta correta</h4>
-                            <input type="text" placeholder="Resposta correta">
-                            <input type="text" placeholder="URL da imagem correta">
-                        </div>
-
-                        <div>
-                            <h4>Respostas incorretas</h4>
-                            <input type="text" placeholder="Resposta incorreta 1º">
-                            <input type="text" placeholder="URL da imagem incorreta 1º">
-                            <br>
-                            <input type="text" placeholder="Resposta incorreta 2º">
-                            <input type="text" placeholder="URL da imagem incorreta 1º">
-                            <br>
-                            <input type="text" placeholder="Resposta incorreta 3º">
-                            <input type="text" placeholder="URL da imagem incorreta 3º">
-                        </div>
-
+                    
                     </div>
+                </div>
                 
+                <div>
+                    <div class="pre_edit">
+                        <h4>Pergunta 2</h4>
+                        <img src="./imagens/pen.png" alt="Caneta">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="create_question">
-                <div class="question_2">
-                    <h4>Pergunta 2</h4>
-                    <img src="./imagens/pen.png" alt="Caneta">
+                
+                <div>
+                    <div class="pre_edit">
+                        <h4>Pergunta 3</h4>
+                        <img src="./imagens/pen.png" alt="Caneta">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="create_question">
-                <div class="question_3">
-                    <h4>Pergunta 3</h4>
-                    <img src="./imagens/pen.png" alt="Caneta">
-                </div>
-            </div>
-            
-            
-            
-            <button class="btn-create">Prosseguir para criar níveis</button>
+                
+                <button class="btn-create">Prosseguir para criar níveis</button>
 
+            </div>
+
+
+            <div class="decide_level_container">
+
+                <h2>Agora, decida os níveis</h2>
+
+                <div class="edit">
+                    <h4>Nível 1</h4>
+                    <input type="text" placeholder="Título do nível">
+                    <input type="text" placeholder="% de acerto mínimo">
+                    <input type="text" placeholder="URL da imagem do nível">
+                    <input type="text" placeholder="Descrição do nível">
+
+                </div>
+                <div class="pre_edit">
+                    <h4>Nível 2</h4>
+                    <img src="/imagens/pen.png" alt="Caneta">
+                </div>
+                <div class="pre_edit">
+                    <h4>Nível 3</h4>
+                    <img src="/imagens/pen.png" alt="Caneta">
+                </div>
+
+                <button class="btn-create">Finalizar Quizz</button>
+
+            </div>
+
+
+            <div class="quizz_done_container">
+
+                <h2>Seu quizz está pronto!</h2>
+
+                <div class="quizz quizz_done">
+                    <h3>O quanto você é de boas?</h3>
+                </div>
+
+                <div class="fx-col gap-10">
+                    <button class="btn-create btn-quizz-done">Acessar Quizz</button>
+                    <button class="btn-back-home">Voltar para casa</button>
+                </div>
+
+            </div>
+        
         </main>
         
+        <main class="play_quizz">
+            
+        </main>
 
         
         
