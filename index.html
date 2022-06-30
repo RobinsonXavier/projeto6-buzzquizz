@@ -18,12 +18,12 @@
             <h1>BuzzQuizz</h1>
         </header>
         
-        <main>
+        <main class="visualize_quizz">
             
             <div class="myQuizz">
                 <div class="myQuizz_empty">
                     <p>Você não criou nenhum quizz ainda :(</p>
-                    <button class="btn-create-quizz">Criar Quizz</button>
+                    <button class="btn-dashed">Criar Quizz</button>
                 </div>
 
                 <div class="myQuizz_box">
@@ -69,7 +69,82 @@
                 </div>
             </div>
         </main>
+        
+        <main class="create_quizz">
 
+
+
+
+            <div class="start_create">
+                <h2>Comece pelo começo</h2>
+                <div class="input_box">
+                    <input type="text" placeholder="Título do seu quizz">
+                    <input type="text" placeholder="URL da imagem do seu quizz">
+                    <input type="text" placeholder="Quantidade de perguntas do quizz">
+                    <input type="text" placeholder="Quantidade de níveis do quizz">
+
+                </div>
+
+                <button class="btn-create">Prosseguir para criar perguntas</button>
+            </div>
+
+
+
+
+            <div class="create_question">
+
+                <h2>Crie suas perguntas</h2>
+                <div class="create_question_box">
+
+                    <div class="question_1">
+                        <div>
+                            <h4>Pergunta 1</h4>
+                            <input type="text" placeholder="Texto da pergunta">
+                            <input type="text" placeholder="Cor de fundo da pergunta">
+                        </div>
+
+                        <div>
+                            <h4>Resposta correta</h4>
+                            <input type="text" placeholder="Resposta correta">
+                            <input type="text" placeholder="URL da imagem correta">
+                        </div>
+
+                        <div>
+                            <h4>Respostas incorretas</h4>
+                            <input type="text" placeholder="Resposta incorreta 1º">
+                            <input type="text" placeholder="URL da imagem incorreta 1º">
+                            <br>
+                            <input type="text" placeholder="Resposta incorreta 2º">
+                            <input type="text" placeholder="URL da imagem incorreta 1º">
+                            <br>
+                            <input type="text" placeholder="Resposta incorreta 3º">
+                            <input type="text" placeholder="URL da imagem incorreta 3º">
+                        </div>
+
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="create_question">
+                <div class="question_2">
+                    <h4>Pergunta 2</h4>
+                    <img src="./imagens/pen.png" alt="Caneta">
+                </div>
+            </div>
+            
+            <div class="create_question">
+                <div class="question_3">
+                    <h4>Pergunta 3</h4>
+                    <img src="./imagens/pen.png" alt="Caneta">
+                </div>
+            </div>
+            
+            
+            
+            <button class="btn-create">Prosseguir para criar níveis</button>
+
+        </main>
         
 
         

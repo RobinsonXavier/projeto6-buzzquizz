@@ -98,8 +98,11 @@ p {
 } */
 
 
+/* --------------------------------------------------------------------------------------- */
 body {
     font-family: 'Roboto', sans-serif;
+    /* background-color: #E5E5E5; */
+    background-color: rgba(240, 240, 240, 1);
 }
 
 header{
@@ -125,7 +128,43 @@ header h1{
 
 main{
     width: 1100px;
-    margin: 100px auto 0px auto;
+    margin: 120px auto 0px auto;
+}
+
+h2{
+    font-size: 23px;
+    font-weight: bold;
+    color: black;
+
+    padding-left: 12px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+h3{
+    color: white;
+    font-weight: 500;
+    font-size: 19px;
+
+    transform: translateY(-10px);
+}
+
+h4{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.txt-center{
+    text-align: center;
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+
+.visualize_quizz{
+    display: none;
+    /* display: block; */
 }
 
 .myQuizz{
@@ -147,7 +186,7 @@ main{
 }
 .myQuizz_box{
     /* display: none; */
-    display: initial;
+    display: block;
 }
 
 .myQuizz_content{
@@ -181,7 +220,7 @@ main{
     font-weight: 400;
 }
 
-.btn-create-quizz{
+.btn-dashed{
 
     padding: 5px 20px;
     border-radius: 40px;
@@ -197,15 +236,6 @@ main{
     align-self: center;
 }
 
-
-h2{
-    font-size: 20px;
-    line-height: 23.44px;
-    font-weight: bold;
-    color: black;
-
-    padding-left: 12px;
-}
 
 .allQuizz_content{
     display: flex;
@@ -225,10 +255,136 @@ h2{
     align-items: flex-end;  
 }
 
-.quizz h3{
-    color: white;
-    font-weight: 500;
-    font-size: 19px;
 
-    transform: translateY(-10px);
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+.create_quizz{
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+    height: min-content ; /*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+}
+
+/*--------------------------------------------------------------------------------------------------------------- */
+
+.start_create{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    width: 600px;
+ 
+    display: none;
+}
+
+.start_create h2 {
+    text-align: center;
+}
+.create_quizz .input_box{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    /* width: 600px; */
+    
+    padding: 25px;
+    
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+}
+
+input{
+    display: block;
+    border: 1px solid rgba(209, 209, 209, 1);
+    height: 36px;
+
+    border-radius: 5px;
+    padding-left: 20px;
+
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 22.27px;
+    font-style: italic;
+    color: #BABABA;
+}
+
+.btn-create{
+    height: 54px;
+    width: 367px;
+
+    font-size: 24px;
+    text-align: center;
+    color: rgba(255, 245, 244, 1);
+    font-weight: 400;
+    line-height: 24.61px;
+    background-color: rgba(236, 54, 45, 1);
+
+    align-self: center;
+    border-radius: 15px;
+    border: none;
+}
+
+/* -------------------------------------------------------------------------------------  */
+
+
+.create_question{
+    /* display: none; */
+    background-color: blueviolet;
+    width: 600px;
+
+    padding: 25px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+}
+
+.create_question_box{
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+}
+
+.question_1{
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+.question_1 div{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.question_2{
+    height: 64px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.question_3{
+    height: 64px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img{
+    height: 23px;
+    width: 26px;
 }
