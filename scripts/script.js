@@ -1,5 +1,6 @@
 let quizzList = [];
 
+let totalQuizz;
 
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
@@ -43,19 +44,32 @@ let listOfQuizz = () => {
         listOfQuizz.innerHTML += 
                                     `<div class="quizz">
                                         <div class="div_img">
-                                            <img src="./imagens/Rectangle 36.png" alt="">
+                                            <img src="${quizzList[i].image}" alt="">
                                         </div>
                                         <h3>${quizzList[i].title}</h3>
                                         <input type="hidden" value="${i}">
                                     </div>`;
     }
+
+    getQuizzInformationInArray();
 }
 
-let clickQuizz = (e) => {
-    
+let getQuizzInformationInArray = () => {
+    totalQuizz = document.querySelectorAll(".quizz");
+    totalQuizz = [...totalQuizz];
+    totalQuizz.map(element => element.addEventListener('click', clickQuizz));
+}
+
+
+
+let clickQuizz = (element) => {
+    let quizz = element.currentTarget;
     const displayOff = document.querySelector(".spot");
     displayOff.classList.add("visualize_quizz");
     displayOff.classList.remove("spot");
+
+    console.log(element.currentTarget);
+
 }
 
 
