@@ -246,16 +246,56 @@ h4{
 
 .quizz{
     margin: 20px auto;
-    background-image: url('/imagens/Rectangle\ 36.png');
+    /* background-image: url('/imagens/Rectangle\ 36.png'); */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 1)); */
+    
     width: 340px;
     height: 181px;
 
     border-radius: 10px;
 
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: flex-end;  
+    align-items: flex-end;   */
 }
+
+.div_img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+}
+
+.div_img::after{
+    position: absolute;
+    content: '';
+
+    height: 100%;
+    width: 100%;
+
+    top: 0;
+    left: 0;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9));
+
+    border-radius: 10px;
+
+}
+
+.quizz img{
+    height: 100%;
+    width: 100%;
+
+    filter: saturate(1.5);
+}
+
+
+
+.quizz h3{
+    transform: translateY(-40px);
+    text-align: center;
+}
+
 
 
 
@@ -466,6 +506,7 @@ input{
 
 
     margin-top: -94px;
+    display: none;
 }
 
 .header_play_quizz{

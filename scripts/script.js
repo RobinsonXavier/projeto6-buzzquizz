@@ -36,13 +36,16 @@ let listOfQuizz = () => {
     displayOn.classList.remove("visualize_quizz");
     displayOn.classList.add("spot");
 
+
     for(let i = 0; i < quizzList.length; i++) {
 
         listOfQuizz.innerHTML += 
-        `<div class="quizz" onclick="">
-            <h3>${quizzList[i].title}</h3>
-        </div>`;
-
+                                    `<div class="quizz">
+                                        <div class="div_img">
+                                            <img src="./imagens/Rectangle 36.png" alt="">
+                                        </div>
+                                        <h3>${quizzList[i].title}</h3>
+                                    </div>`;
     }
 }
 
