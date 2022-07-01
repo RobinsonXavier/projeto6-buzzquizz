@@ -109,6 +109,7 @@ header{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
 
     background-color: #EC362D;
     box-shadow: 0 1px 15px rgb(46, 45, 45);
@@ -130,6 +131,7 @@ main{
     width: 1100px;
     margin: 120px auto 0px auto;
 }
+
 
 h2{
     font-size: 23px;
@@ -279,7 +281,7 @@ h4{
     display: none;
 }
 
-.start_create h2 {
+.start_create_container h2 {
     text-align: center;
 }
 .start_create_container .input_box{
@@ -455,3 +457,38 @@ input{
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
+
+
+.play_quizz{
+    height: 100vh;
+    width: 100%;
+    background-color: red;
+
+
+    margin-top: -94px;
+}
+
+.header_play_quizz{
+    height: 200px;
+    background-color: yellow;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+   background: url(/imagens/Rectangle\ 36.png), linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
+   background-repeat: no-repeat;
+   background-size:cover;
+   background-position: calc(center);
+}
+
+.header_play_quizz h3{
+    font-size: 39px;
+    font-weight: 400;
+}
+
+.content_play_quizz{
+    margin-top: 200px;
+    background-color: green;
+    height: 300px;
+}
