@@ -38,7 +38,7 @@ let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
     const listOfQuizz = document.querySelector(".allQuizz_content");
 
-    displayOn.classList.remove("visualize_quizz");
+    displayOn.classList.remove("invisible");
     displayOn.classList.add("spot");
 
 
@@ -72,7 +72,7 @@ let clickQuizz = (element) => {
     let value = identify.value;
 
     const displayOff = document.querySelector(".spot");
-    displayOff.classList.add("visualize_quizz");
+    displayOff.classList.add("invisible");
     displayOff.classList.remove("spot");
 
     getObject(value);
@@ -142,8 +142,29 @@ let renderQuizz = (object) => {
 
 let showQuizz = () => {
     let displayOn = document.querySelector(".play_quizz");
-    displayOn.classList.remove("visualize_quizz");
+    displayOn.classList.remove("invisible");
 }
 
 
 getQuiz();
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------
+
+let $btn_create_quiz_1 = document.querySelector('.btn-dashed')
+let $btn_create_quiz_2 = document.querySelector('.btn_circle') 
+let $visualize_quizz = document.querySelector('.visualize_quizz')
+let $create_quizz = document.querySelector('.create_quizz')
+
+$btn_create_quiz_1.addEventListener('click', create_quizz)
+$btn_create_quiz_2.addEventListener('click', create_quizz)
+
+function create_quizz(){
+
+    $visualize_quizz.classList.add('invisible')
+    $create_quizz.classList.remove('invisible')
+}
