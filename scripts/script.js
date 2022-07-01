@@ -2,9 +2,12 @@ let quizzList = [];
 
 let totalQuizz;
 
+let alerta = () => {
+    alert("AAAAAAAAAAAAAAAAA");
+}
+
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
-    
     promise.catch(errorGet);
 
     promise.then(getData);
@@ -13,7 +16,7 @@ let getQuiz = () => {
 let getData = (request) => {
 
     quizzList = request.data;
-    // console.log(quizzList)
+    console.log(quizzList)
 
     listOfQuizz();
 }
@@ -35,8 +38,8 @@ let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
     const listOfQuizz = document.querySelector(".allQuizz_content");
 
-    // displayOn.classList.remove("visualize_quizz");
-    // displayOn.classList.add("spot");
+    displayOn.classList.remove("visualize_quizz");
+    displayOn.classList.add("spot");
 
 
     for(let i = 0; i < quizzList.length; i++) {
@@ -47,7 +50,7 @@ let listOfQuizz = () => {
                                             <img src="${quizzList[i].image}" alt="">
                                         </div>
                                         <h3>${quizzList[i].title}</h3>
-                                        <input type="hidden" value="${i}">
+                                        <input type="hidden" value="${quizzList[i].id}">
                                     </div>`;
     }
 
@@ -63,13 +66,83 @@ let getQuizzInformationInArray = () => {
 
 
 let clickQuizz = (element) => {
+
     let quizz = element.currentTarget;
+    let identify = quizz.querySelector("input");
+    let value = identify.value;
+
     const displayOff = document.querySelector(".spot");
     displayOff.classList.add("visualize_quizz");
     displayOff.classList.remove("spot");
 
-    console.log(element.currentTarget);
+    getObject(value);
 
+}
+
+let getObject = (id) => {
+
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`);
+
+    promise.catch(errorGetObject);
+
+    promise.then(renderQuizz);
+}
+
+let errorGetObject = () => {
+
+    alert("Quizz não encontrado")
+
+    window.location.reload();
+}
+
+let renderQuizz = (object) => {
+    
+    const dataObject = object.data; 
+    const screenQuizz = document.querySelector(".play_quizz");
+    console.log(screenQuizz)
+    const questionsObject = dataObject.questions;
+
+
+    screenQuizz.innerHTML = 
+        `<div class="header_play_quizz">
+            <img src="${dataObject.image}" alt="">
+            <h3>${dataObject.title}</h3>
+        </div>`;
+
+
+    for(let i = 0; i < questionsObject.length; i++) {
+
+        screenQuizz.innerHTML += 
+        `<div class="content_play_quizz">
+
+            <div class="div_tittle">
+                <p class="tittle">${questionsObject[i].title}</p>
+            </div>
+            
+            <div class="box_play_quizz">
+            `;
+        
+        for(let j = 0; j < questionsObject[i].answers; j++) {
+
+            screenQuizz += 
+            `<div class="card_play_quizz">
+                <div>
+                    <img src="${questionsObject[i].answers[j].image}" alt="">
+                </div>
+                <div>
+                    <p>${questionsObject[i].answers[j].text}</p>
+                </div>
+                <input type="hidden" value="${questionsObject[i].answers[j].isCorrectAnswer}">
+            </div>`
+        }
+    }
+
+    showQuizz();
+}
+
+let showQuizz = () => {
+    let displayOn = document.querySelector(".play_quizz");
+    displayOn.classList.remove("visualize_quizz");
 }
 
 

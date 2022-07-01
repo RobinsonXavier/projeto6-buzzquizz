@@ -164,11 +164,6 @@ h4{
 /* -------------------------------------------------------------------------------------- */
 
 
-.visualize_quizz{
-    display: none;
-    /* display: block; */
-}
-
 .myQuizz{
     display: flex;
     flex-direction: column;
@@ -499,9 +494,7 @@ input{
 .play_quizz{
     margin-top: -92px;
     height: min-content;
-    width: 100%;
-    /* display: none; */
-    
+    width: 100%;   
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -570,4 +563,9 @@ input{
 }
 .card_play_quizz p {
     text-align: center;
+}
+
+.visualize_quizz{
+    display: none;
+    /* display: block; */
 }
