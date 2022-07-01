@@ -28,19 +28,31 @@ let errorGet = () => {
 
 }
 
-
+//incompleto ainda
 let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
     const listOfQuizz = document.querySelector(".allQuizz_content");
 
-    displayOn.classList.remove("visualize_quizz")
+    displayOn.classList.remove("visualize_quizz");
+    displayOn.classList.add("spot");
 
     for(let i = 0; i < quizzList.length; i++) {
 
-        listOfQuizz.innerHTML += `<div class="quizz">
-                                    <h3>${quizzList[i].title}</h3>
-                                  </div>`
+        listOfQuizz.innerHTML += 
+        `<div class="quizz" onclick="">
+            <h3>${quizzList[i].title}</h3>
+        </div>`;
+
     }
 }
+
+let clickQuizz = (element) => {
+
+    const displayOff = document.querySelector(".spot");
+    displayOff.classList.add("visualize_quizz");
+    displayOff.classList.remove("spot");
+
+}
+
 
 getQuiz();
