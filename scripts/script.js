@@ -1,5 +1,6 @@
 let quizzList = [];
 
+
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     
@@ -11,7 +12,7 @@ let getQuiz = () => {
 let getData = (request) => {
 
     quizzList = request.data;
-    console.log(quizzList)
+    // console.log(quizzList)
 
     listOfQuizz();
 }
@@ -33,8 +34,8 @@ let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
     const listOfQuizz = document.querySelector(".allQuizz_content");
 
-    displayOn.classList.remove("visualize_quizz");
-    displayOn.classList.add("spot");
+    // displayOn.classList.remove("visualize_quizz");
+    // displayOn.classList.add("spot");
 
 
     for(let i = 0; i < quizzList.length; i++) {
@@ -45,16 +46,16 @@ let listOfQuizz = () => {
                                             <img src="./imagens/Rectangle 36.png" alt="">
                                         </div>
                                         <h3>${quizzList[i].title}</h3>
+                                        <input type="hidden" value="${i}">
                                     </div>`;
     }
 }
 
-let clickQuizz = (element) => {
-
+let clickQuizz = (e) => {
+    
     const displayOff = document.querySelector(".spot");
     displayOff.classList.add("visualize_quizz");
     displayOff.classList.remove("spot");
-
 }
 
 
