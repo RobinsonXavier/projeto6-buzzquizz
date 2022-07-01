@@ -99,9 +99,8 @@ let renderQuizz = (object) => {
     
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
-    console.log(screenQuizz)
     const questionsObject = dataObject.questions;
-
+    console.log(questionsObject[1].answers[0].text)
 
     screenQuizz.innerHTML = 
         `<div class="header_play_quizz">
@@ -122,9 +121,9 @@ let renderQuizz = (object) => {
             <div class="box_play_quizz">
             `;
         
-        for(let j = 0; j < questionsObject[i].answers; j++) {
+        for(let j = 0; j < questionsObject[i].answers.length; j++) {
 
-            screenQuizz += 
+            screenQuizz.innerHTML += 
             `<div class="card_play_quizz">
                 <div>
                     <img src="${questionsObject[i].answers[j].image}" alt="">
@@ -134,8 +133,14 @@ let renderQuizz = (object) => {
                 </div>
                 <input type="hidden" value="${questionsObject[i].answers[j].isCorrectAnswer}">
             </div>`
+            
+            if(questionsObject[i].answers.length - 1 == j) {
+                screenQuizz.innerHTML+= `</div>`;
+            }
         }
+
     }
+
 
     showQuizz();
 }
