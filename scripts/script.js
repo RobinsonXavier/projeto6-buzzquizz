@@ -2,10 +2,6 @@ let quizzList = [];
 
 let totalQuizz;
 
-let alerta = () => {
-    alert("AAAAAAAAAAAAAAAAA");
-}
-
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promise.catch(errorGet);
@@ -100,9 +96,54 @@ let renderQuizz = (object) => {
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
-    console.log(questionsObject[1].answers[0].text)
 
-    screenQuizz.innerHTML = 
+    let answerList = [];
+
+    screenQuizz.innerHTML +=
+        `<div class="header_play_quizz">
+            <img src="${dataObject.image}" alt="">
+            <h3>${dataObject.title}</h3>
+        </div>`;
+
+    for(let i = 0; i < questionsObject.length; i++) {
+        screenQuizz.innerHTML +=
+        `<div class="content_play_quizz">
+
+            <div class="div_tittle">
+                <p class="tittle">${questionsObject[i].title}</p>
+            </div>
+
+            <div class="box_play_quizz answer${i}">
+
+            </div>
+        </div>`;
+
+        for(let index = 0; index < questionsObject[i].answers.length; index ++){
+            let scriptCode =
+            `<div class="card_play_quizz">
+                <div>
+                    <img src="${questionsObject[i].answers[index].image}" alt="">
+                </div>
+                <div>
+                    <p>${questionsObject[i].answers[index].text}</p>
+                </div>
+                <input type="hidden" value="${questionsObject[i].answers[index].isCorrectAnswer}">
+            </div>`;
+
+            answerList[index] = scriptCode;
+        }
+    }
+
+    for(let count = 0; count < questionsObject.length; count++) {
+        answerList.sort(shuffleAnswers);
+
+        for(let i = 0; i < answerList.length; i++) {
+            let fatherTag = document.querySelector(`.answer${count}`);
+            fatherTag.innerHTML += answerList[i];    
+        }
+    }
+
+ /*   screenQuizz.innerHTML = 
         `<div class="header_play_quizz">
             <img src="${dataObject.image}" alt="">
             <h3>${dataObject.title}</h3>
@@ -121,9 +162,9 @@ let renderQuizz = (object) => {
             <div class="box_play_quizz">
             `;
         
-        for(let j = 0; j < questionsObject[i].answers.length; j++) {
 
-            screenQuizz.innerHTML += 
+        for(let j = 0; j < questionsObject[i].answers.length; j++) {
+            let stringCode = 
             `<div class="card_play_quizz">
                 <div>
                     <img src="${questionsObject[i].answers[j].image}" alt="">
@@ -133,14 +174,12 @@ let renderQuizz = (object) => {
                 </div>
                 <input type="hidden" value="${questionsObject[i].answers[j].isCorrectAnswer}">
             </div>`
-            
-            if(questionsObject[i].answers.length - 1 == j) {
-                screenQuizz.innerHTML+= `</div>`;
-            }
-        }
+            answerList[j] = stringCode;
+        }  
 
     }
 
+    console.log(answerList) */
 
     showQuizz();
 }
@@ -150,11 +189,12 @@ let showQuizz = () => {
     displayOn.classList.remove("invisible");
 }
 
+let shuffleAnswers = () => {
+    return Math.random() - 0.5;
+}
+
 
 getQuiz();
-
-
-
 
 
 
