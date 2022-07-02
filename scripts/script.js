@@ -100,13 +100,15 @@ let renderQuizz = (object) => {
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
-    console.log(questionsObject[1].answers[0].text)
+    // console.log(questionsObject[1].answers[0].text)
+    console.log(dataObject)
+    console.log(questionsObject)
 
     screenQuizz.innerHTML = 
         `<div class="header_play_quizz">
             <img src="${dataObject.image}" alt="">
             <h3>${dataObject.title}</h3>
-        </div>`;
+         </div>`;
 
 
     for(let i = 0; i < questionsObject.length; i++) {
@@ -139,8 +141,8 @@ let renderQuizz = (object) => {
             }
         }
 
+        screenQuizz.innerHTML += "</div>"
     }
-
 
     showQuizz();
 }
