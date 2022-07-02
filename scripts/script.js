@@ -96,6 +96,9 @@ let renderQuizz = (object) => {
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
+    // console.log(questionsObject[1].answers[0].text)
+    console.log(dataObject)
+    console.log(questionsObject)
 
     let answerList = [];
 
@@ -145,12 +148,27 @@ let renderQuizz = (object) => {
             }
         }
     }
+    
+    showQuizz();
+
+}
+
+let showQuizz = () => {
+    let displayOn = document.querySelector(".play_quizz");
+    displayOn.classList.remove("invisible");
+}
+
+let shuffleAnswers = () => {
+    return Math.random() - 0.5;
+}
+
+getQuiz();
 
  /*   screenQuizz.innerHTML = 
         `<div class="header_play_quizz">
             <img src="${dataObject.image}" alt="">
             <h3>${dataObject.title}</h3>
-        </div>`;
+         </div>`;
 
 
     for(let i = 0; i < questionsObject.length; i++) {
@@ -180,24 +198,16 @@ let renderQuizz = (object) => {
             answerList[j] = stringCode;
         }  
 
+        screenQuizz.innerHTML += "</div>"
     }
 
-    console.log(answerList) */
 
-    showQuizz();
-}
-
-let showQuizz = () => {
-    let displayOn = document.querySelector(".play_quizz");
-    displayOn.classList.remove("invisible");
-}
-
-let shuffleAnswers = () => {
-    return Math.random() - 0.5;
 }
 
 
-getQuiz();
+
+
+
 
 
 
@@ -266,3 +276,4 @@ function back_home(){
 }
 
 // -----------------------------------------------------------------------------------------------------------------
+*/
