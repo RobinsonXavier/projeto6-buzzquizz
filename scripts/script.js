@@ -164,53 +164,6 @@ let shuffleAnswers = () => {
 
 getQuiz();
 
- /*   screenQuizz.innerHTML = 
-        `<div class="header_play_quizz">
-            <img src="${dataObject.image}" alt="">
-            <h3>${dataObject.title}</h3>
-         </div>`;
-
-
-    for(let i = 0; i < questionsObject.length; i++) {
-
-        screenQuizz.innerHTML += 
-        `<div class="content_play_quizz">
-
-            <div class="div_tittle">
-                <p class="tittle">${questionsObject[i].title}</p>
-            </div>
-            
-            <div class="box_play_quizz">
-            `;
-        
-
-        for(let j = 0; j < questionsObject[i].answers.length; j++) {
-            let stringCode = 
-            `<div class="card_play_quizz">
-                <div>
-                    <img src="${questionsObject[i].answers[j].image}" alt="">
-                </div>
-                <div>
-                    <p>${questionsObject[i].answers[j].text}</p>
-                </div>
-                <input type="hidden" value="${questionsObject[i].answers[j].isCorrectAnswer}">
-            </div>`
-            answerList[j] = stringCode;
-        }  
-
-        screenQuizz.innerHTML += "</div>"
-    }
-
-
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -276,4 +229,3 @@ function back_home(){
 }
 
 // -----------------------------------------------------------------------------------------------------------------
-*/
