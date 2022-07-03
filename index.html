@@ -22,12 +22,12 @@
         <main class="visualize_quizz invisible">
             
             <div class="myQuizz">
-                <div class="myQuizz_empty invisible">
+                <div class="myQuizz_empty">
                     <p>Você não criou nenhum quizz ainda :(</p>
                     <button class="btn-dashed">Criar Quizz</button>
                 </div>
 
-                <div class="myQuizz_box">
+                <div class="myQuizz_box invisible">
                     <div class="top_myQuizz">
                         <h2>Seus Quizzes</h2>
                         <button class="btn_circle"></button>
@@ -68,123 +68,35 @@
 
 
 
-
             <div class="start_create_container">
                 <h2>Comece pelo começo</h2>
                 <div class="edit">
-                    <input type="text" placeholder="Título do seu quizz">
-                    <input type="text" placeholder="URL da imagem do seu quizz">
-                    <input type="text" placeholder="Quantidade de perguntas do quizz">
-                    <input type="text" placeholder="Quantidade de níveis do quizz">
+                    <input id="input_title_quizz" type="text" placeholder="Título do seu quizz">
+                    <input id="input_url_image" type="text" placeholder="URL da imagem do seu quizz">
+                    <input id="input_qt_question" type="number" min="3" placeholder="Quantidade de perguntas do quizz">
+                    <input id="input_qt_level" type="number" min="2" placeholder="Quantidade de níveis do quizz">
 
                 </div>
 
-                <button class="btn-create btn-create-question">Prosseguir para criar perguntas</button>
+                <button type="submit" class="btn-create btn-create-question">Prosseguir para criar perguntas</button>
             </div>
 
 
-            <div class="create_question_container invisible">
-
-                <div>
-
-                    <h2>Crie suas perguntas</h2>
-                    <div>
-    
-                        <div class="edit mg-top-40">
-                            <div>
-                                <h4>Pergunta 1</h4>
-                                <input type="text" placeholder="Texto da pergunta">
-                                <input type="text" placeholder="Cor de fundo da pergunta">
-                            </div>
-    
-                            <div>
-                                <h4>Resposta correta</h4>
-                                <input type="text" placeholder="Resposta correta">
-                                <input type="text" placeholder="URL da imagem correta">
-                            </div>
-    
-                            <div>
-                                <h4>Respostas incorretas</h4>
-                                <input type="text" placeholder="Resposta incorreta 1º">
-                                <input type="text" placeholder="URL da imagem incorreta 1º">
-                                <br>
-                                <input type="text" placeholder="Resposta incorreta 2º">
-                                <input type="text" placeholder="URL da imagem incorreta 1º">
-                                <br>
-                                <input type="text" placeholder="Resposta incorreta 3º">
-                                <input type="text" placeholder="URL da imagem incorreta 3º">
-                            </div>
-    
-                        </div>
-                    
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="pre_edit">
-                        <h4>Pergunta 2</h4>
-                        <img src="./imagens/pen.png" alt="Caneta">
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="pre_edit">
-                        <h4>Pergunta 3</h4>
-                        <img src="./imagens/pen.png" alt="Caneta">
-                    </div>
-                </div>
-                
-                <button class="btn-create btn-decide-level">Prosseguir para criar níveis</button>
-
-            </div>
+            <div class="create_question_container invisible"></div>
 
 
-            <div class="decide_level_container invisible">
 
-                <h2>Agora, decida os níveis</h2>
-
-                <div class="edit">
-                    <h4>Nível 1</h4>
-                    <input type="text" placeholder="Título do nível">
-                    <input type="text" placeholder="% de acerto mínimo">
-                    <input type="text" placeholder="URL da imagem do nível">
-                    <input type="text" placeholder="Descrição do nível">
-
-                </div>
-                <div class="pre_edit">
-                    <h4>Nível 2</h4>
-                    <img src="/imagens/pen.png" alt="Caneta">
-                </div>
-                <div class="pre_edit">
-                    <h4>Nível 3</h4>
-                    <img src="/imagens/pen.png" alt="Caneta">
-                </div>
-
-                <button class="btn-create btn-finalize-quizz">Finalizar Quizz</button>
-
-            </div>
+            <div class="decide_level_container invisible"></div>
 
 
-            <div class="quizz_done_container invisible">
 
-                <h2>Seu quizz está pronto!</h2>
 
-                <div class="quizz quizz_done">
-                    <h3>O quanto você é de boas?</h3>
-                </div>
 
-                <div class="fx-col gap-10">
-                    <button class="btn-create btn-quizz-done">Acessar Quizz</button>
-                    <button class="btn-back-home">Voltar para casa</button>
-                </div>
-
-            </div>
+            <div class="quizz_done_container invisible"></div>
         
         </main>
         
-        <main class="play_quizz invisible">
-            
-        </main>
+        <main class="play_quizz invisible"></main>
 
         
         
@@ -193,76 +105,3 @@
     <script src="./scripts/script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos/reset.css">
-    <link rel="stylesheet" href="./estilos/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet"> 
-    <title>Buzz Quizz</title>
-</head>
-<body>
-    <div class="container">
-        <header> 
-            <h1>BuzzQuizz</h1> 
-        </header>  
-        
-        <div class="conteudo">
-
-            <div class="criaQuizz">
-                <div>
-                    <span>Você não criou nenhum</span>
-                    <span>quizz ainda :(</span>
-                </div>
-    
-                <button class="criar">Criar Quizz</button>
-            </div>
-
-            <div >
-                <h2>Todos Quizzes</h2>
-                <div class="listaQuizzes">
-
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                    <div>
-                        <img src="" alt="">
-                        <p>Dar joinha aumenta sua estimativa de vida, diz luffy do chapéu de palha</p>
-                    </div>
-                 
-                    
-                </div>
-            </div>
-        </div>
-    
-    </div>
-</body>
-</html> -->
