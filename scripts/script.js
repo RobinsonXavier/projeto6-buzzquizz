@@ -280,6 +280,9 @@ let quizzLevel = () => {
             } else if(maxValue < minValue) {
                 yourLevel = levelObject[i];
                 maxValue = minValue;                
+            } else if (valueHit > minValue) {
+                yourLevel = levelObject[i];
+                maxValue = minValue;
             }
         } else {
             if (minValue === 0 || minValue === "0") {
