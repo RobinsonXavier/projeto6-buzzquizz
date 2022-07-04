@@ -165,74 +165,6 @@ let renderQuizz = (object) => {
 
 }
 
-let renderMyQuizz = (data) => {
-    console.log(data)
-    const startUp = document.querySelector(".myQuizz");
-    const screenQuizz = document.querySelector(".play_quizz");
-    const questionsObject = data.questions;
-    levelObject = data.levels;
-    console.log(data)
-    console.log(questionsObject)
-
-    let answerList = [];
-
-    screenQuizz.innerHTML +=
-        `<div class="header_play_quizz">
-            <img src="${data.image}" alt="">
-            <h3>${data.title}</h3>
-        </div>`;
-
-    for (let i = 0; i < questionsObject.length; i++) {
-        let div_title = document.getElementsByClassName("div_title");
-
-        screenQuizz.innerHTML +=
-            `<div class="content_play_quizz">
-
-            <div class="div_title">
-                <p class="title">${questionsObject[i].title}</p>
-            </div>
-
-            <div class="box_play_quizz answer${i}">
-
-            </div>
-        </div>`;
-
-        div_title[i].style.backgroundColor = questionsObject[i].color;
-
-        for (let index = 0; index < questionsObject[i].answers.length; index++) {
-            let scriptCode =
-                `<div class="card_play_quizz">
-                <div>
-                    <img src="${questionsObject[i].answers[index].image}" alt="">
-                </div>
-                <div>
-                    <p>${questionsObject[i].answers[index].text}</p>
-                </div>
-                <input type="hidden" value="${questionsObject[i].answers[index].isCorrectAnswer}">
-            </div>`;
-
-            answerList[index] = scriptCode;
-            // answerList.push(scriptCode)
-
-            if (index === questionsObject[i].answers.length - 1) {
-
-
-                answerList.sort(shuffleAnswers);
-
-                for (let count = 0; count < answerList.length; count++) {
-                    let fatherTag = document.querySelector(`.answer${i}`);
-                    fatherTag.innerHTML += answerList[count];
-                }
-
-                answerList = [];
-            }
-        }
-    }
-
-    showQuizz();
-    getAnswerInformationInArray();
-    startUp.scrollIntoView();
-}
 
 let showQuizz = () => {
     let displayOn = document.querySelector(".play_quizz");
@@ -599,8 +531,8 @@ function finalize_quizz() {
         $quizz_done_container.classList.remove('invisible')
     }
     else {
-        alert('Preencha todos os campos corretamente')
     }
+        alert('Preencha todos os campos corretamente')
 
 
 }
@@ -609,11 +541,10 @@ function finalize_quizz() {
 function acess_quizz() {
 
 
+    let id_newQuizz = localStorage.getItem(`id_${newQuizz.title}`)
 
-
-
+    getObject(id_newQuizz)
     $quizz_done_container.classList.add('invisible')
-    // renderMyQuizz(newQuizz)
 }
 
 
@@ -1054,14 +985,14 @@ function clear_allInputs() {
 }
 
 
-<<<<<<< HEAD
 function post_newQuizz() {
-=======
-function post_newQuizz(){
->>>>>>> e760a13275179fbc2e4c5cbac3b7a9884014f237
 
     let newQuizzLocal = newQuizz;
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', newQuizzLocal)
+
+
+
+    
 
     promise.then(successefulPost)
     promise.catch(ErrorPost)
@@ -1071,8 +1002,11 @@ function ErrorPost(e) {
     alert('Não foi possível enviar o novo Quizz ao servidor!')
     console.log(e.response)
 }
-function successefulPost() {
+function successefulPost(request) {
     console.log('Novo Quizz enviado ao servidor com sucesso!')
+    // renderQuizz(request)
+
+    localStorage.setItem(`id_${request.data.title}`, `${request.data.id}`)
 }
 
 
