@@ -650,7 +650,6 @@ function set_questions_dynamically(qt_question){
 
 
 function validate_create_question(){
-    return true;
 
     let title_question = document.getElementsByClassName('title_question')
     let title_question_value = get_value_from(title_question)
@@ -1073,7 +1072,7 @@ function validate_levelDescription(levelDescription){
     let cont = 0;
     for(let i = 0; i < levelDescription.length; i++){
 
-        if(levelDescription.length >= 30){
+        if(levelDescription[i].length >= 30){
             cont++;
         }
 
@@ -1096,7 +1095,7 @@ function validate_hitPercent(hitPercent){
         if( hitPercent[i] >= 0 && hitPercent[i] <= 100){
             cont++;
 
-            if(hitPercent[i] === 0){
+            if(hitPercent[i] === 0 || hitPercent[i] === "0"){
                 percentZero++;
             }
         }
