@@ -1,6 +1,7 @@
 let quizzList = [];
 let valueAnswersList = [];
 let valueCount = 0;
+let questionsCount = 1;
 let totalQuizz;
 
 let getQuiz = () => {
@@ -181,8 +182,7 @@ let clickAnswer = (element) => {
     const answer = element.currentTarget;
     const question = answer.parentElement;
     const valueAnswer = answer.querySelector("input");
-    const allAnswer = question.querySelectorAll(".card_play_quizz");
-    
+    const allAnswer = question.querySelectorAll(".card_play_quizz");   
 
     if(!answer.classList.contains(`check`)) {
 
@@ -229,11 +229,17 @@ let clickAnswer = (element) => {
     }
     }
    
-
+    setTimeout(nextQuestion, 2000);
 }
 
+
 let nextQuestion = () => {
-    setTimeout(scrollIntoView())
+    const questionFocus = document.querySelector(`.answer${questionsCount}`);
+    questionsCount++;
+
+    if(questionFocus != null) {
+        questionFocus.scrollIntoView(false);
+    }
 }
 
 getQuiz();
