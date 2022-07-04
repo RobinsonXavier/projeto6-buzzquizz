@@ -187,8 +187,8 @@ const $btn_create_quiz_dashed = document.querySelector('.btn-dashed')
 const $btn_create_quiz_circle = document.querySelector('.btn_circle') 
 const $btn_create_question = document.querySelector('.btn-create-question')
 
-const $btn_quizz_done = document.querySelector('.btn-quizz-done')
-const $btn_back_home = document.querySelector('.btn-back-home')
+// const $btn_quizz_done = document.querySelector('.btn-quizz-done')
+// const $btn_back_home = document.querySelector('.btn-back-home')
 
 $btn_create_quiz_dashed.addEventListener('click', start_create_quizz)
 $btn_create_quiz_circle.addEventListener('click', start_create_quizz)
@@ -196,8 +196,8 @@ $btn_create_quiz_circle.addEventListener('click', start_create_quizz)
 $btn_create_question.addEventListener('click', create_question)
 
 
-$btn_quizz_done.addEventListener('click', acess_quizz)
-$btn_back_home.addEventListener('click', back_home)
+// $btn_quizz_done.addEventListener('click', acess_quizz)
+// $btn_back_home.addEventListener('click', back_home)
 
 let newQuizz;
 let qt_question;
@@ -223,26 +223,42 @@ function create_question(){
     let input_qt_question = document.getElementById('input_qt_question').value
     let input_qt_level = document.getElementById('input_qt_level').value
 
-    
-    if(validate_start_create(input_title_quizz, input_url_image, input_qt_question, input_qt_level)){
+    if(validate_MaxAndMinLength_in_title(input_title_quizz)){
+
+        if(validate_url(input_url_image)){
+
+            if(validate_start_create(input_title_quizz, input_url_image, input_qt_question, input_qt_level)){
         
-        qt_question = input_qt_question;
-        qt_level = input_qt_level
+                qt_question = input_qt_question;
+                qt_level = input_qt_level
+        
+                newQuizz = {
+                    title: input_title_quizz,
+                    image: input_url_image,
+                }
+        
+        
+                set_questions_dynamically(qt_question)
+        
+                $start_create_container.classList.add('invisible')
+                $create_question_container.classList.remove('invisible')
+            }
+            else{
+                alert('Preencha todos os campos corretamente!')
+            }
 
-        newQuizz = {
-            title: input_title_quizz,
-            image: input_url_image,
+
         }
-
-
-        set_questions_dynamically(qt_question)
-
-        $start_create_container.classList.add('invisible')
-        $create_question_container.classList.remove('invisible')
+        else{
+            alert('URL inválida!')
+        }
     }
     else{
-        alert('Preencha todos os campos corretamente!')
+        alert('O título só pode ter entre 20 e 65 caracteres!')
     }
+
+    
+    
 
 }
 
@@ -335,13 +351,14 @@ function set_questions_dynamically(qt_question){
                     <div>
                         <h4>Pergunta 1</h4>
                         <input class="title_question" type="text" placeholder="Texto da pergunta">
-                        <input class="color_question" type="text" placeholder="Cor de fundo da pergunta">
+                        <input class="color_question" type="input" placeholder="Cor de fundo da pergunta">
+                
                     </div>
 
                     <div>
                         <h4>Resposta correta</h4>
                         <input class="right_answer" type="text" placeholder="Resposta correta">
-                        <input class="image_right_answer" type="text" placeholder="URL da imagem correta">
+                        <input class="image_right_answer" type="url" pattern="https://.*"  placeholder="URL da imagem correta">
                     </div>
 
                     <div>
@@ -460,11 +477,19 @@ function validate_create_question(){
         return false;
     }
 
+    if(validate_color(color_question_value)){
+        return false;
+    }
+
     if(validate_inputEmpty(right_answer_value)){
         return false;
     }
 
     if(validate_inputEmpty(image_right_answer_value)){
+        return false;
+    }
+
+    if(validate_arrayOfURLS(image_right_answer_value)){
         return false;
     }
 
@@ -727,6 +752,53 @@ function successefulPost(){
 }
 
 
+function validate_MaxAndMinLength_in_title(title){
+
+    if(title.length >= 20 && title.length <= 65){
+        return true;
+    }
+    return false;
+}
 
 
+function validate_url(url){
+
+    try{
+        let newUrl = new URL(url)
+    }
+    catch(TypeError){
+        return false;
+    }
+
+    return true;
+}
+
+// INCOMPLETA
+function validate_arrayOfURLS(array_url){
+
+    for(let i = 0; i < array_url.length; i++){
+        validate_url(array_url[i]);
+    }
+}
+
+function validate_minLength_in_question(question){
+
+    if(question.length >= 20){
+        return true;
+    }
+    return false;
+}
+
+
+function validate_color(array_color){
+
+    for(let i = 0; i < array_color.length; i++){
+
+        if(array_color[i].match(/#[A-za-z0-9]{6}/g) === null){
+            return true;
+        }
+    }
+    return false;
+
+}
 
