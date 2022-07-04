@@ -2,6 +2,7 @@ let quizzList = [];
 let valueAnswersList = [];
 let valueCount = 0;
 let questionsCount = 1;
+let levelObject;
 let totalQuizz;
 
 let getQuiz = () => {
@@ -98,7 +99,7 @@ let renderQuizz = (object) => {
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
-    // console.log(questionsObject[1].answers[0].text)
+    levelObject = dataObject.levels;
     console.log(dataObject)
     console.log(questionsObject)
 
@@ -111,6 +112,8 @@ let renderQuizz = (object) => {
         </div>`;
 
     for(let i = 0; i < questionsObject.length; i++) {
+        let div_title = document.getElementsByClassName("div_title");
+
         screenQuizz.innerHTML +=
         `<div class="content_play_quizz">
 
@@ -123,9 +126,7 @@ let renderQuizz = (object) => {
             </div>
         </div>`;
 
-        // Setar cor aos titulos das perguntas dinamicamente
-        // let div_title = document.getElementsByClassName('div_title')
-        // div_title.style.backgroundColor = questionsObject[i].color
+        div_title[i].style.backgroundColor = questionsObject[i].color;
 
         for(let index = 0; index < questionsObject[i].answers.length; index ++){
             let scriptCode =
@@ -144,6 +145,7 @@ let renderQuizz = (object) => {
 
             // Troquei igualdade não restrita == para igualdade restrita ===
             if(index === questionsObject[i].answers.length -1) {
+
 
                 answerList.sort(shuffleAnswers);
 
@@ -239,7 +241,71 @@ let nextQuestion = () => {
 
     if(questionFocus != null) {
         questionFocus.scrollIntoView(false);
+    } else {
+        quizzLevel();
     }
+}
+
+let quizzLevel = () => {
+    const screenQuizz = document.querySelector(".play_quizz");
+    let yourLevel;
+    let maxValue = 0;
+    let valueLevels = [];
+    let add = 0;
+
+
+    for (let i = 0; i < valueAnswersList.length; i++) {
+        
+        if(valueAnswersList[i] === "true") {
+            valueLevels.push(1);
+        } else {
+            valueLevels.push(0);
+        }
+        add += valueLevels[i];
+    }
+
+    let  valueHit = 100 *(add / valueLevels.length);
+
+    for (let i = 0; i < levelObject.length; i++) {
+        let minValue = levelObject[i].minValue;
+
+        if(maxValue !== 0) {
+            if(valueHit >= minValue && maxValue < minValue) {
+                yourLevel = levelObject[i];
+                maxValue = minValue;
+            }
+        } else {
+            yourLevel = levelObject[i];
+            maxValue = minValue;
+        }
+        
+    }
+
+    screenQuizz.innerHTML += 
+    `<div class="content_play_quizz">
+
+        <div class="div_title backOrange">
+            <p class="title">${valueHit.toFixed(0)}% de acerto : ${yourLevel.title}</p>
+        </div>
+
+        <div class="box_play_quizz final">
+            <div class="card_play_quizz">
+                <div class="level_box">
+                    <img class="final_img" src="${yourLevel.image}" alt="">
+                </div>
+                <div class="level_box">
+                    <p>${yourLevel.text}</p>
+                </div>
+            </div>
+        </div>
+        <button>Reiniciar Quizz</button>
+        <button>Voltar pra home</button>
+
+    </div>`
+
+    const finalFocus = document.querySelector(".final");
+    finalFocus.scrollIntoView(false);
+   
 }
 
 getQuiz();
