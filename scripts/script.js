@@ -337,7 +337,7 @@ let quizzLevel = () => {
             </div>
             <button class="btn_restart">Reiniciar Quizz</button>
             <button class="btn_backhome">Voltar pra home</button>
-    
+        
         </div>`
     }
 
@@ -490,6 +490,7 @@ function decide_level(){
 
     
 }
+
 
 function finalize_quizz(){
 
@@ -646,6 +647,7 @@ function set_questions_dynamically(qt_question){
 
 
 function validate_create_question(){
+    return true;
 
     let title_question = document.getElementsByClassName('title_question')
     let title_question_value = get_value_from(title_question)
@@ -788,16 +790,27 @@ function validate_finalize_quizz(){
     if(validate_inputEmpty(title_level_value)){
         return false;
     }
-
     if(validate_inputEmpty(hit_percent_value)){
         return false;
     }
-
     if(validate_inputEmpty(image_level_value)){
         return false;
     }
-
     if(validate_inputEmpty(level_description_value)){
+        return false;
+    }
+
+
+    if(validate_titleLevel(title_level_value)){
+        return false;
+    }
+    if(validate_levelDescription(level_description_value)){
+        return false;
+    }
+    if(validate_arrayOfURLS(image_level_value)){
+        return false;
+    }
+    if(validate_hitPercent(hit_percent_value)){
         return false;
     }
 
@@ -1033,3 +1046,62 @@ function validate_color(array_color){
 
 }
 
+
+function validate_titleLevel(titleLevel){
+
+    let cont = 0;
+    for(let i = 0; i < titleLevel.length; i++){
+
+        if(titleLevel[i].length >= 10){
+            cont++;
+        }
+    }
+
+    if(cont === titleLevel.length){
+        return false;
+    }
+     
+    return true;
+}
+
+
+function validate_levelDescription(levelDescription){
+
+    let cont = 0;
+    for(let i = 0; i < levelDescription.length; i++){
+
+        if(levelDescription.length >= 30){
+            cont++;
+        }
+
+    }
+    if(cont === levelDescription.length){
+        return false;
+    }
+
+    return true;
+}
+
+
+function validate_hitPercent(hitPercent){
+
+    let cont = 0;
+    let percentZero = 0;
+
+    for(let i = 0; i < hitPercent.length; i++){
+
+        if( hitPercent[i] >= 0 && hitPercent[i] <= 100){
+            cont++;
+
+            if(hitPercent[i] === 0){
+                percentZero++;
+            }
+        }
+    }
+
+    if(cont === hitPercent.length && percentZero === 1){
+        return false;
+    }
+
+    return true;
+}
