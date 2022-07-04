@@ -270,39 +270,76 @@ let quizzLevel = () => {
     for (let i = 0; i < levelObject.length; i++) {
         let minValue = levelObject[i].minValue;
 
-        if(maxValue !== 0) {
-            if(valueHit >= minValue && maxValue < minValue) {
+        if(valueHit !== 0) {
+            if(maxValue === 0) {
+                if(valueHit > minValue) {
+                    yourLevel = levelObject[i];
+                    maxValue = minValue;
+                }
+
+            } else if(maxValue < minValue) {
                 yourLevel = levelObject[i];
-                maxValue = minValue;
+                maxValue = minValue;                
             }
         } else {
-            yourLevel = levelObject[i];
-            maxValue = minValue;
+            if (minValue === 0 || minValue === "0") {
+                yourLevel = levelObject[i];
+            }
         }
-        
+
+       
     }
 
-    screenQuizz.innerHTML += 
-    `<div class="content_play_quizz">
+    if(yourLevel === undefined) {
+        screenQuizz.innerHTML += 
+        `<div class="content_play_quizz">
 
-        <div class="div_title backOrange">
-            <p class="title">${valueHit.toFixed(0)}% de acerto : ${yourLevel.title}</p>
-        </div>
+            <div class="div_title backOrange">
+                <p class="title">${valueHit.toFixed(0)}% de acerto : é cara... não foi dessa vez</p>
+            </div>
 
-        <div class="box_play_quizz final">
-            <div class="card_play_quizz">
-                <div class="level_box">
-                    <img class="final_img" src="${yourLevel.image}" alt="">
+            <div class="box_play_quizz final">
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <img class="final_img" src="../imagens/piratinhaQueEstica.jpeg" alt="">
+                    </div>
                 </div>
-                <div class="level_box">
-                    <p>${yourLevel.text}</p>
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <p>Esquenta não, na proxima você consegue!</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <button class="btn_restart">Reiniciar Quizz</button>
-        <button class="btn_backhome">Voltar pra home</button>
+            <button class="btn_restart">Reiniciar Quizz</button>
+            <button class="btn_backhome">Voltar pra home</button>
 
-    </div>`
+        </div>`
+    } else {
+
+        screenQuizz.innerHTML += 
+        `<div class="content_play_quizz">
+    
+            <div class="div_title backOrange">
+                <p class="title">${valueHit.toFixed(0)}% de acerto : ${yourLevel.title}</p>
+            </div>
+    
+            <div class="box_play_quizz final">
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <img class="final_img" src="${yourLevel.image}" alt="">
+                    </div>
+                </div>
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <p>${yourLevel.text}</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn_restart">Reiniciar Quizz</button>
+            <button class="btn_backhome">Voltar pra home</button>
+    
+        </div>`
+    }
 
     const finalFocus = document.querySelector(".final");
     finalFocus.scrollIntoView(false);

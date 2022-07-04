@@ -538,6 +538,21 @@ input{
     margin: 0 auto;
 }
 
+.card_play_quizz .final_img {
+    width: 360px;
+    height: 270px;
+}
+
+.card_play_quizz .level_box {
+    width: 320px;
+}
+
+.level_box p {
+    overflow-wrap: break-word;
+    font-weight: 700;
+    font-size: 19px;
+    color: #484848;
+}
 
 .green {
     color: #009C22;
