@@ -46,6 +46,11 @@ let listOfQuizz = () => {
 
     if(validateMyQuiz !== null) {
         myQuizzEmpty.classList.add("invisible");
+
+        for (let i = 0; i < array.length; i++) {
+            
+            
+        }
         listOfMyQuizz.classList.remove("invisible");
 
 
@@ -1016,6 +1021,10 @@ function ErrorPost(e) {
 function successefulPost(request) {
     console.log('Novo Quizz enviado ao servidor com sucesso!');
     localStorage.setItem(`${request.data.title}`,`${request.data.id}`);
+    myQuizzList.push(localStorage.getItem(request.data.title));
+    localStorage.setItem("nome", `${JSON.stringify(myQuizzList)}`);
+    
+
 }
 
 
