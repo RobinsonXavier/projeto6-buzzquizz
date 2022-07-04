@@ -166,6 +166,7 @@ let renderQuizz = (object) => {
 }
 
 let renderMyQuizz = (data) => {
+    console.log(data)
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = data.questions;
     levelObject = data.levels;
@@ -566,6 +567,7 @@ function finalize_quizz(){
 
         newQuizz.levels = levels;
         
+        console.log(newQuizz)
         post_newQuizz(newQuizz)
 
         set_quizzDone_dynamilly()
@@ -589,28 +591,8 @@ function finalize_quizz(){
 // INCOMPLETA
 function acess_quizz(){
 
-  
-    // let promise = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes')
-    // promise.catch()
-    // promise.then( (object) => {
-
-
-    //     // console.log(object.data.length)
-    //     for(let i = 0; i < object.data.length; i++){
-
-
-    //         if('quantos cachorros sabem latir ?' === object.data[i].title){
-
-    //             // console.log('tem esse titulo')
-    //             renderQuizz(object.data)
-    //         }
-
-    //     }
-
-    // })
-
     $quizz_done_container.classList.add('invisible')
-    renderMyQuizz(newQuizz)
+    // renderMyQuizz(newQuizz)
 }
 
 
@@ -627,7 +609,11 @@ function validate_start_create(title, image, qt_question, qt_level){
         return false;
     }
 
-    if(parseInt(qt_question) < 3 || parseInt(qt_level) < 2){
+    // if(parseInt(qt_question) < 3 || parseInt(qt_level) < 2){
+    //     return false;
+    // }
+
+    if(parseInt(qt_question) < 1 || parseInt(qt_level) < 1){
         return false;
     }
 
@@ -736,7 +722,6 @@ function set_questions_dynamically(qt_question){
 
 
 function validate_create_question(){
-    return true;
 
     let title_question = document.getElementsByClassName('title_question')
     let title_question_value = get_value_from(title_question)
@@ -864,7 +849,6 @@ function set_levels_dynamically(qt_level){
 
 function validate_finalize_quizz(){
 
-    return true;
     let title_level = document.getElementsByClassName('title_level')
     let title_level_value = get_value_from(title_level)
     
