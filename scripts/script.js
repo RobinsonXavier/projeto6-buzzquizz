@@ -680,34 +680,39 @@ function validate_create_question(){
     if(validate_inputEmpty(title_question_value)){
         return false;
     }
-
     if(validate_inputEmpty(color_question_value)){
         return false;
     }
-
     if(validate_color(color_question_value)){
         return false;
     }
-
     if(validate_inputEmpty(right_answer_value)){
         return false;
     }
-
     if(validate_inputEmpty(image_right_answer_value)){
+        return false;
+    }
+    if(validate_inputEmpty(wrong_answer_1_value)){
+        return false;
+    }
+    if(validate_inputEmpty(image_wrong_answer_1_value)){
         return false;
     }
 
     if(validate_arrayOfURLS(image_right_answer_value)){
         return false;
     }
-
-    if(validate_inputEmpty(wrong_answer_1_value)){
+    if(validate_arrayOfURLS(image_wrong_answer_1_value)){
+        return false;
+    }
+    if(validate_arrayOfURLS(image_wrong_answer_2_value)){
+        return false;
+    }
+    if(validate_arrayOfURLS(image_wrong_answer_3_value)){
         return false;
     }
 
-    if(validate_inputEmpty(image_wrong_answer_1_value)){
-        return false;
-    }
+
     
     
     let questions = set_inputValues_in_arrayOfObject(title_question_value, color_question_value, right_answer_value, image_right_answer_value, wrong_answer_1_value, image_wrong_answer_1_value, wrong_answer_2_value, image_wrong_answer_2_value, wrong_answer_3_value, image_wrong_answer_3_value)
@@ -981,13 +986,31 @@ function validate_url(url){
     return true;
 }
 
-// INCOMPLETA
+
+
 function validate_arrayOfURLS(array_url){
 
+    let contUrl = 0;
+    let contEmpty = 0;
     for(let i = 0; i < array_url.length; i++){
-        validate_url(array_url[i]);
+        if(array_url[i] !== ''){
+            if(validate_url(array_url[i])){
+                contUrl++;
+            }
+        }
+        else{
+            contEmpty++;
+        }
     }
+
+    if((contUrl + contEmpty) === array_url.length ){
+        return false;
+    }
+
+    return true;
 }
+
+
 
 function validate_minLength_in_question(question){
 
