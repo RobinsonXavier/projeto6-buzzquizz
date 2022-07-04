@@ -1,5 +1,6 @@
 let quizzList = [];
-
+let valueAnswers = [];
+let checkCount = 0;
 let totalQuizz;
 
 let getQuiz = () => {
@@ -156,6 +157,7 @@ let renderQuizz = (object) => {
     }
     
     showQuizz();
+    getAnswerInformationInArray();
 
 }
 
@@ -166,6 +168,73 @@ let showQuizz = () => {
 
 let shuffleAnswers = () => {
     return Math.random() - 0.5;
+}
+
+let getAnswerInformationInArray = () => {
+    let totalAnswers = document.querySelectorAll(".card_play_quizz");
+    totalAnswers = [...totalAnswers];
+    totalAnswers.map(answer => answer.addEventListener("click", clickAnswer));
+    
+}
+
+let clickAnswer = (element) => {
+    const answer = element.currentTarget;
+    const question = answer.parentElement;
+    const valueAnswer = answer.querySelector("input");
+    const allAnswer = question.querySelectorAll(".card_play_quizz");
+    
+
+    if(!answer.classList.contains(`check`)) {
+
+       for (let index = 0; index < allAnswer.length; index++) {
+
+            if(valueAnswer.value === "true") {
+                answer.querySelector("div p").classList.add("green");
+
+                for (let i = 0; i < allAnswer.length; i++) {
+                    
+                    if(answer !== allAnswer[i]) {
+
+                        allAnswer[i].querySelector("div img").classList.add("wrongAnswer");
+                        allAnswer[i].querySelector("div p").classList.add("wrongAnswer");
+                        allAnswer[i].querySelector("div p").classList.add("orange");
+                        
+                    }
+                }
+                
+            } else {
+                answer.querySelector("div p").classList.add("orange");
+
+                for(let j = 0; j < allAnswer.length; j++) {
+
+                    if(answer !== allAnswer[j]) {
+
+                        if(allAnswer[j].querySelector("input").value === "true") {
+                            allAnswer[j].querySelector("div img").classList.add("wrongAnswer");
+                            allAnswer[j].querySelector("div p").classList.add("wrongAnswer");
+                            allAnswer[j].querySelector("div p").classList.add("green");
+                        } else {
+    
+                            allAnswer[j].querySelector("div img").classList.add("wrongAnswer");
+                            allAnswer[j].querySelector("div p").classList.add("wrongAnswer");
+                            allAnswer[j].querySelector("div p").classList.add("orange");
+    
+                        }        
+                        
+                    }
+                }   
+            }
+       }
+       for(let check = 0; check < allAnswer.length; check++) {
+        allAnswer[check].classList.add(`check`);
+    }
+    }
+    console.log(allAnswer);
+
+}
+
+let nextQuestion = () => {
+    setTimeout(scrollIntoView())
 }
 
 getQuiz();

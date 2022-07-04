@@ -498,7 +498,6 @@ input{
     flex-direction: column;
     gap: 10px;
     /* background-color: red; */
-
     cursor: pointer;
 }
 
@@ -506,6 +505,19 @@ input{
     height: 175px;
     width: 329px;
 }
+
+.wrongAnswer {
+    opacity: 0.5;
+}
+
+.orange {
+    color: #FF4B4B;
+}
+
+.green {
+    color: #009C22;
+}
+
 .card_play_quizz p {
     text-align: center;
     font-size: 20px;
