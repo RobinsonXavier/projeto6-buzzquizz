@@ -4,6 +4,7 @@ let valueCount = 0;
 let questionsCount = 1;
 let levelObject;
 let totalQuizz;
+let restartObject;
 
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
@@ -95,7 +96,7 @@ let errorGetObject = () => {
 }
 
 let renderQuizz = (object) => {
-    
+    restartObject = object;
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
@@ -298,14 +299,44 @@ let quizzLevel = () => {
                 </div>
             </div>
         </div>
-        <button>Reiniciar Quizz</button>
-        <button>Voltar pra home</button>
+        <button class="btn_restart">Reiniciar Quizz</button>
+        <button class="btn_backhome">Voltar pra home</button>
 
     </div>`
 
     const finalFocus = document.querySelector(".final");
     finalFocus.scrollIntoView(false);
+
+    getBtnInformationFinalQuizz();
    
+}
+
+let getBtnInformationFinalQuizz = () => {
+    let getBtnRestart = document.querySelector(".btn_restart");
+    let getBtnBackHome = document.querySelector(".btn_backhome");
+
+    getBtnRestart.addEventListener("click", restartQuizz);
+    getBtnBackHome.addEventListener("click", comeBackHome);
+}
+
+let restartQuizz = () => {
+    const screenQuizz = document.querySelector(".play_quizz");
+    const scrollUp = document.querySelector(".play_quizz");
+
+    valueAnswersList = [];
+    valueCount = 0;
+    questionsCount = 1;
+    levelObject;
+    totalQuizz;
+    screenQuizz.innerHTML = "";
+
+    renderQuizz(restartObject);
+    scrollUp.scrollIntoView(true);
+
+}
+
+let comeBackHome = () => {
+    window.location.reload();
 }
 
 getQuiz();

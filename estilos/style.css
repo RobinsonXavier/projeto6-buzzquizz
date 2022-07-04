@@ -517,6 +517,28 @@ input{
     background-color: #EC362D;
 }
 
+.btn_restart {
+    background-color: #EC362D;
+    color: #FFF5F4;
+    font-size: 21px;
+    border-radius: 10px;
+    width: 260px;
+    height: 52px;
+    border: none;
+    margin: 0 auto;
+}
+
+.btn_backhome {
+    background-color: rgba(240, 240, 240, 1);
+    font-size: 21px;
+    color: #818181;
+    width: 220px;
+    height: 44px;
+    border: none;
+    margin: 0 auto;
+}
+
+
 .green {
     color: #009C22;
 }
