@@ -5,13 +5,13 @@ let questionsCount = 1;
 let levelObject;
 let totalQuizz;
 let restartObject;
-let myQuizzList = []
+let myQuizzTemp;
 
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promise.catch(errorGet);
 
-    promise.then(getData);
+    promise.then(getData);                                        
 }
 
 let getData = (request) => {
@@ -37,24 +37,9 @@ let errorGet = () => {
 //incompleto ainda
 let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
-    const listOfMyQuizz = document.querySelector(".myQuizz_box");
-    const myQuizzEmpty = document.querySelector(".myQuizz_empty")
     const listOfQuizz = document.querySelector(".allQuizz_content");
     let myQuizzes = document.querySelector(".myQuizz_content");
-    let validateMyQuiz = localStorage.getItem("id");
-    console.log(validateMyQuiz);
 
-    if(validateMyQuiz !== null) {
-        myQuizzEmpty.classList.add("invisible");
-
-        for (let i = 0; i < array.length; i++) {
-            
-            
-        }
-        listOfMyQuizz.classList.remove("invisible");
-
-
-    }
     displayOn.classList.remove("invisible");
     displayOn.classList.add("spot");
 
@@ -1020,11 +1005,6 @@ function ErrorPost(e) {
 
 function successefulPost(request) {
     console.log('Novo Quizz enviado ao servidor com sucesso!');
-    localStorage.setItem(`${request.data.title}`,`${request.data.id}`);
-    myQuizzList.push(localStorage.getItem(request.data.title));
-    localStorage.setItem("nome", `${JSON.stringify(myQuizzList)}`);
-    
-
 }
 
 
@@ -1145,8 +1125,10 @@ function validate_hitPercent(hitPercent) {
 }
 
 
-function layoutResponsivo(){
-
-
-
-}
+window.addEventListener('resize', responsive_layout);
+window.addEventListener('load', responsive_layout);
+function responsive_layout(){
+    let width = window.screen.width;
+    let percent80_of = width * 0.8;
+    $visualize_quizz.style.width = `${percent80_of}px`
+} 
