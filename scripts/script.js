@@ -167,6 +167,7 @@ let renderQuizz = (object) => {
 
 let renderMyQuizz = (data) => {
     console.log(data)
+    const startUp = document.querySelector(".myQuizz");
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = data.questions;
     levelObject = data.levels;
@@ -230,6 +231,7 @@ let renderMyQuizz = (data) => {
 
     showQuizz();
     getAnswerInformationInArray();
+    startUp.scrollIntoView();
 }
 
 let showQuizz = () => {
@@ -1052,7 +1054,11 @@ function clear_allInputs() {
 }
 
 
+<<<<<<< HEAD
 function post_newQuizz() {
+=======
+function post_newQuizz(){
+>>>>>>> e760a13275179fbc2e4c5cbac3b7a9884014f237
 
     let newQuizzLocal = newQuizz;
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', newQuizzLocal)
