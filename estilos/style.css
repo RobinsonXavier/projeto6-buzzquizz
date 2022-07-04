@@ -498,7 +498,6 @@ input{
     flex-direction: column;
     gap: 10px;
     /* background-color: red; */
-
     cursor: pointer;
 }
 
@@ -506,6 +505,59 @@ input{
     height: 175px;
     width: 329px;
 }
+
+.wrongAnswer {
+    opacity: 0.5;
+}
+
+.orange {
+    color: #FF4B4B;
+}
+.backOrange {
+    background-color: #EC362D;
+}
+
+.btn_restart {
+    background-color: #EC362D;
+    color: #FFF5F4;
+    font-size: 21px;
+    border-radius: 10px;
+    width: 260px;
+    height: 52px;
+    border: none;
+    margin: 0 auto;
+}
+
+.btn_backhome {
+    background-color: rgba(240, 240, 240, 1);
+    font-size: 21px;
+    color: #818181;
+    width: 220px;
+    height: 44px;
+    border: none;
+    margin: 0 auto;
+}
+
+.card_play_quizz .final_img {
+    width: 360px;
+    height: 270px;
+}
+
+.card_play_quizz .level_box {
+    width: 320px;
+}
+
+.level_box p {
+    overflow-wrap: break-word;
+    font-weight: 700;
+    font-size: 19px;
+    color: #484848;
+}
+
+.green {
+    color: #009C22;
+}
+
 .card_play_quizz p {
     text-align: center;
     font-size: 20px;

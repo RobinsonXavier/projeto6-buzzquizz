@@ -1,6 +1,10 @@
 let quizzList = [];
-
+let valueAnswersList = [];
+let valueCount = 0;
+let questionsCount = 1;
+let levelObject;
 let totalQuizz;
+let restartObject;
 
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
@@ -92,11 +96,11 @@ let errorGetObject = () => {
 }
 
 let renderQuizz = (object) => {
-    
+    restartObject = object;
     const dataObject = object.data; 
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
-    // console.log(questionsObject[1].answers[0].text)
+    levelObject = dataObject.levels;
     console.log(dataObject)
     console.log(questionsObject)
 
@@ -109,6 +113,8 @@ let renderQuizz = (object) => {
         </div>`;
 
     for(let i = 0; i < questionsObject.length; i++) {
+        let div_title = document.getElementsByClassName("div_title");
+
         screenQuizz.innerHTML +=
         `<div class="content_play_quizz">
 
@@ -121,9 +127,7 @@ let renderQuizz = (object) => {
             </div>
         </div>`;
 
-        // Setar cor aos titulos das perguntas dinamicamente
-        // let div_title = document.getElementsByClassName('div_title')
-        // div_title.style.backgroundColor = questionsObject[i].color
+        div_title[i].style.backgroundColor = questionsObject[i].color;
 
         for(let index = 0; index < questionsObject[i].answers.length; index ++){
             let scriptCode =
@@ -143,6 +147,7 @@ let renderQuizz = (object) => {
             // Troquei igualdade não restrita == para igualdade restrita ===
             if(index === questionsObject[i].answers.length -1) {
 
+
                 answerList.sort(shuffleAnswers);
 
                 for(let count = 0; count < answerList.length; count++) {
@@ -156,6 +161,7 @@ let renderQuizz = (object) => {
     }
     
     showQuizz();
+    getAnswerInformationInArray();
 
 }
 
@@ -166,6 +172,208 @@ let showQuizz = () => {
 
 let shuffleAnswers = () => {
     return Math.random() - 0.5;
+}
+
+let getAnswerInformationInArray = () => {
+    let totalAnswers = document.querySelectorAll(".card_play_quizz");
+    totalAnswers = [...totalAnswers];
+    totalAnswers.map(answer => answer.addEventListener("click", clickAnswer));
+    
+}
+
+let clickAnswer = (element) => {
+    const answer = element.currentTarget;
+    const question = answer.parentElement;
+    const valueAnswer = answer.querySelector("input");
+    const allAnswer = question.querySelectorAll(".card_play_quizz");   
+
+    if(!answer.classList.contains(`check`)) {
+
+        if(valueAnswer.value === "true") {
+            answer.querySelector("div p").classList.add("green");
+            valueAnswersList[valueCount] = valueAnswer.value;
+            valueCount++;
+            for (let i = 0; i < allAnswer.length; i++) {
+                
+                if(answer !== allAnswer[i]) {
+
+                    allAnswer[i].querySelector("div img").classList.add("wrongAnswer");
+                    allAnswer[i].querySelector("div p").classList.add("wrongAnswer");
+                    allAnswer[i].querySelector("div p").classList.add("orange");
+                    
+                }
+            }
+            
+        } else {
+            answer.querySelector("div p").classList.add("orange");
+            valueAnswersList[valueCount] = valueAnswer.value;
+            valueCount++;
+            for(let j = 0; j < allAnswer.length; j++) {
+
+                if(answer !== allAnswer[j]) {
+
+                    if(allAnswer[j].querySelector("input").value === "true") {
+                        allAnswer[j].querySelector("div img").classList.add("wrongAnswer");
+                        allAnswer[j].querySelector("div p").classList.add("wrongAnswer");
+                        allAnswer[j].querySelector("div p").classList.add("green");
+                    } else {
+
+                        allAnswer[j].querySelector("div img").classList.add("wrongAnswer");
+                        allAnswer[j].querySelector("div p").classList.add("wrongAnswer");
+                        allAnswer[j].querySelector("div p").classList.add("orange");
+
+                    }        
+                    
+                }
+            }   
+        }
+       for(let check = 0; check < allAnswer.length; check++) {
+        allAnswer[check].classList.add(`check`);
+    }
+    }
+   
+    setTimeout(nextQuestion, 2000);
+}
+
+
+let nextQuestion = () => {
+    const questionFocus = document.querySelector(`.answer${questionsCount}`);
+    questionsCount++;
+
+    if(questionFocus != null) {
+        questionFocus.scrollIntoView(false);
+    } else {
+        quizzLevel();
+    }
+}
+
+let quizzLevel = () => {
+    const screenQuizz = document.querySelector(".play_quizz");
+    let yourLevel;
+    let maxValue = 0;
+    let valueLevels = [];
+    let add = 0;
+
+
+    for (let i = 0; i < valueAnswersList.length; i++) {
+        
+        if(valueAnswersList[i] === "true") {
+            valueLevels.push(1);
+        } else {
+            valueLevels.push(0);
+        }
+        add += valueLevels[i];
+    }
+
+    let  valueHit = 100 *(add / valueLevels.length);
+
+    for (let i = 0; i < levelObject.length; i++) {
+        let minValue = levelObject[i].minValue;
+
+        if(valueHit !== 0) {
+            if(maxValue === 0) {
+                if(valueHit > minValue) {
+                    yourLevel = levelObject[i];
+                    maxValue = minValue;
+                }
+
+            } else if(maxValue < minValue) {
+                yourLevel = levelObject[i];
+                maxValue = minValue;                
+            }
+        } else {
+            if (minValue === 0 || minValue === "0") {
+                yourLevel = levelObject[i];
+            }
+        }
+
+       
+    }
+
+    if(yourLevel === undefined) {
+        screenQuizz.innerHTML += 
+        `<div class="content_play_quizz">
+
+            <div class="div_title backOrange">
+                <p class="title">${valueHit.toFixed(0)}% de acerto : é cara... não foi dessa vez</p>
+            </div>
+
+            <div class="box_play_quizz final">
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <img class="final_img" src="../imagens/piratinhaQueEstica.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <p>Esquenta não, na proxima você consegue!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn_restart">Reiniciar Quizz</button>
+            <button class="btn_backhome">Voltar pra home</button>
+
+        </div>`
+    } else {
+
+        screenQuizz.innerHTML += 
+        `<div class="content_play_quizz">
+    
+            <div class="div_title backOrange">
+                <p class="title">${valueHit.toFixed(0)}% de acerto : ${yourLevel.title}</p>
+            </div>
+    
+            <div class="box_play_quizz final">
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <img class="final_img" src="${yourLevel.image}" alt="">
+                    </div>
+                </div>
+                <div class="card_play_quizz">
+                    <div class="level_box">
+                        <p>${yourLevel.text}</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn_restart">Reiniciar Quizz</button>
+            <button class="btn_backhome">Voltar pra home</button>
+    
+        </div>`
+    }
+
+    const finalFocus = document.querySelector(".final");
+    finalFocus.scrollIntoView(false);
+
+    getBtnInformationFinalQuizz();
+   
+}
+
+let getBtnInformationFinalQuizz = () => {
+    let getBtnRestart = document.querySelector(".btn_restart");
+    let getBtnBackHome = document.querySelector(".btn_backhome");
+
+    getBtnRestart.addEventListener("click", restartQuizz);
+    getBtnBackHome.addEventListener("click", comeBackHome);
+}
+
+let restartQuizz = () => {
+    const screenQuizz = document.querySelector(".play_quizz");
+    const scrollUp = document.querySelector(".play_quizz");
+
+    valueAnswersList = [];
+    valueCount = 0;
+    questionsCount = 1;
+    levelObject;
+    totalQuizz;
+    screenQuizz.innerHTML = "";
+
+    renderQuizz(restartObject);
+    scrollUp.scrollIntoView(true);
+
+}
+
+let comeBackHome = () => {
+    window.location.reload();
 }
 
 getQuiz();
