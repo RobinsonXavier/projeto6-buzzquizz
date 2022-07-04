@@ -165,6 +165,75 @@ let renderQuizz = (object) => {
 
 }
 
+let renderMyQuizz = (data) => {
+    console.log(data)
+    const startUp = document.querySelector(".myQuizz");
+    const screenQuizz = document.querySelector(".play_quizz");
+    const questionsObject = data.questions;
+    levelObject = data.levels;
+    console.log(data)
+    console.log(questionsObject)
+
+    let answerList = [];
+
+    screenQuizz.innerHTML +=
+        `<div class="header_play_quizz">
+            <img src="${data.image}" alt="">
+            <h3>${data.title}</h3>
+        </div>`;
+
+    for(let i = 0; i < questionsObject.length; i++) {
+        let div_title = document.getElementsByClassName("div_title");
+
+        screenQuizz.innerHTML +=
+        `<div class="content_play_quizz">
+
+            <div class="div_title">
+                <p class="title">${questionsObject[i].title}</p>
+            </div>
+
+            <div class="box_play_quizz answer${i}">
+
+            </div>
+        </div>`;
+
+        div_title[i].style.backgroundColor = questionsObject[i].color;
+
+        for(let index = 0; index < questionsObject[i].answers.length; index ++){
+            let scriptCode =
+            `<div class="card_play_quizz">
+                <div>
+                    <img src="${questionsObject[i].answers[index].image}" alt="">
+                </div>
+                <div>
+                    <p>${questionsObject[i].answers[index].text}</p>
+                </div>
+                <input type="hidden" value="${questionsObject[i].answers[index].isCorrectAnswer}">
+            </div>`;
+
+            answerList[index] = scriptCode;
+            // answerList.push(scriptCode)
+
+            if(index === questionsObject[i].answers.length -1) {
+
+
+                answerList.sort(shuffleAnswers);
+
+                for(let count = 0; count < answerList.length; count++) {
+                    let fatherTag = document.querySelector(`.answer${i}`);
+                    fatherTag.innerHTML += answerList[count];    
+                }
+
+                answerList = [];
+            }
+        }
+    }
+    
+    showQuizz();
+    getAnswerInformationInArray();
+    startUp.scrollIntoView();
+}
+
 let showQuizz = () => {
     let displayOn = document.querySelector(".play_quizz");
     displayOn.classList.remove("invisible");
@@ -398,8 +467,7 @@ const $btn_create_quiz_dashed = document.querySelector('.btn-dashed')
 const $btn_create_quiz_circle = document.querySelector('.btn_circle') 
 const $btn_create_question = document.querySelector('.btn-create-question')
 
-// const $btn_quizz_done = document.querySelector('.btn-quizz-done')
-// const $btn_back_home = document.querySelector('.btn-back-home')
+
 
 $btn_create_quiz_dashed.addEventListener('click', start_create_quizz)
 $btn_create_quiz_circle.addEventListener('click', start_create_quizz)
@@ -407,8 +475,7 @@ $btn_create_quiz_circle.addEventListener('click', start_create_quizz)
 $btn_create_question.addEventListener('click', create_question)
 
 
-// $btn_quizz_done.addEventListener('click', acess_quizz)
-// $btn_back_home.addEventListener('click', back_home)
+
 
 let newQuizz;
 let qt_question;
@@ -498,12 +565,20 @@ function decide_level(){
 function finalize_quizz(){
 
     if(validate_finalize_quizz()){
-        console.log('entrou no if, validou!')
         let levels = validate_finalize_quizz()
 
         newQuizz.levels = levels;
         
+        console.log(newQuizz)
         post_newQuizz(newQuizz)
+
+        set_quizzDone_dynamilly()
+
+        const $btn_quizz_done = document.querySelector('.btn-quizz-done')
+        const $btn_back_home = document.querySelector('.btn-back-home')
+
+        $btn_quizz_done.addEventListener('click', acess_quizz)
+        $btn_back_home.addEventListener('click', back_home)
 
         $decide_level_container.classList.add('invisible')
         $quizz_done_container.classList.remove('invisible')
@@ -515,21 +590,16 @@ function finalize_quizz(){
    
 }
 
-
 // INCOMPLETA
 function acess_quizz(){
 
-
     $quizz_done_container.classList.add('invisible')
-    $visualize_quizz.classList.remove('invisible')
+    // renderMyQuizz(newQuizz)
 }
 
-// INCOMPLETA
-function back_home(){
 
-    
-    $quizz_done_container.classList.add('invisible')
-    $visualize_quizz.classList.remove('invisible')
+function back_home(){
+    window.location.reload();
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -541,7 +611,11 @@ function validate_start_create(title, image, qt_question, qt_level){
         return false;
     }
 
-    if(parseInt(qt_question) < 3 || parseInt(qt_level) < 2){
+    // if(parseInt(qt_question) < 3 || parseInt(qt_level) < 2){
+    //     return false;
+    // }
+
+    if(parseInt(qt_question) < 1 || parseInt(qt_level) < 1){
         return false;
     }
 
@@ -960,21 +1034,23 @@ function clear_allInputs(){
     allInputs.map( input => input.value = '')
 }
 
+function teste(objeto){
+    console.log(objeto)
+}
 
+function post_newQuizz(){
 
-function post_newQuizz(newQuizz){
-
-    const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', newQuizz)
+    const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/', newQuizz)
 
     promise.catch(ErrorPost)
     promise.then(successefulPost)
+    promise.then(teste)
 }
 
 
 function ErrorPost(){
     alert('Não foi possível enviar o novo Quizz ao servidor!')
 }
-
 function successefulPost(){
     console.log('Novo Quizz enviado ao servidor com sucesso!')
 }
@@ -987,8 +1063,6 @@ function validate_MaxAndMinLength_in_title(title){
     }
     return false;
 }
-
-
 function validate_url(url){
 
     try{
@@ -1000,9 +1074,6 @@ function validate_url(url){
 
     return true;
 }
-
-
-
 function validate_arrayOfURLS(array_url){
 
     let contUrl = 0;
@@ -1022,11 +1093,9 @@ function validate_arrayOfURLS(array_url){
         return false;
     }
 
+    console.log('URL INVÁLIDA')
     return true;
 }
-
-
-
 function validate_minLength_in_question(question){
 
     if(question.length >= 20){
@@ -1034,8 +1103,6 @@ function validate_minLength_in_question(question){
     }
     return false;
 }
-
-
 function validate_color(array_color){
 
     for(let i = 0; i < array_color.length; i++){
@@ -1047,8 +1114,6 @@ function validate_color(array_color){
     return false;
 
 }
-
-
 function validate_titleLevel(titleLevel){
 
     let cont = 0;
@@ -1062,11 +1127,10 @@ function validate_titleLevel(titleLevel){
     if(cont === titleLevel.length){
         return false;
     }
-     
+    
+    console.log('TÍTULO INVÁLIDO')
     return true;
 }
-
-
 function validate_levelDescription(levelDescription){
 
     let cont = 0;
@@ -1080,11 +1144,10 @@ function validate_levelDescription(levelDescription){
     if(cont === levelDescription.length){
         return false;
     }
-
+    
+    console.log('DESCRIÇÃO DO NÍVEL INVÁLIDO')
     return true;
 }
-
-
 function validate_hitPercent(hitPercent){
 
     let cont = 0;
@@ -1095,7 +1158,7 @@ function validate_hitPercent(hitPercent){
         if( hitPercent[i] >= 0 && hitPercent[i] <= 100){
             cont++;
 
-            if(hitPercent[i] === 0 || hitPercent[i] === "0"){
+            if(hitPercent[i] === '0' || hitPercent[i] === 0){
                 percentZero++;
             }
         }
@@ -1105,5 +1168,6 @@ function validate_hitPercent(hitPercent){
         return false;
     }
 
+    console.log('PORCENTAGEM INVÁLIDA')
     return true;
 }
