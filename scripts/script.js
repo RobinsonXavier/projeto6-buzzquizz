@@ -5,6 +5,7 @@ let questionsCount = 1;
 let levelObject;
 let totalQuizz;
 let restartObject;
+let myQuizzList = []
 
 let getQuiz = () => {
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
@@ -36,8 +37,19 @@ let errorGet = () => {
 //incompleto ainda
 let listOfQuizz = () => {
     const displayOn = document.querySelector(".visualize_quizz");
+    const listOfMyQuizz = document.querySelector(".myQuizz_box");
+    const myQuizzEmpty = document.querySelector(".myQuizz_empty")
     const listOfQuizz = document.querySelector(".allQuizz_content");
+    let myQuizzes = document.querySelector(".myQuizz_content");
+    let validateMyQuiz = localStorage.getItem("id");
+    console.log(validateMyQuiz);
 
+    if(validateMyQuiz !== null) {
+        myQuizzEmpty.classList.add("invisible");
+        listOfMyQuizz.classList.remove("invisible");
+
+
+    }
     displayOn.classList.remove("invisible");
     displayOn.classList.add("spot");
 
@@ -97,6 +109,7 @@ let errorGetObject = () => {
 
 let renderQuizz = (object) => {
     restartObject = object;
+    const startUp = document.querySelector(".myQuizz");
     const dataObject = object.data;
     const screenQuizz = document.querySelector(".play_quizz");
     const questionsObject = dataObject.questions;
@@ -162,7 +175,7 @@ let renderQuizz = (object) => {
 
     showQuizz();
     getAnswerInformationInArray();
-
+    startUp.scrollIntoView(false);
 }
 
 
@@ -531,8 +544,8 @@ function finalize_quizz() {
         $quizz_done_container.classList.remove('invisible')
     }
     else {
-    }
         alert('Preencha todos os campos corretamente')
+    }
 
 
 }
@@ -541,10 +554,11 @@ function finalize_quizz() {
 function acess_quizz() {
 
 
-    let id_newQuizz = localStorage.getItem(`id_${newQuizz.title}`)
 
-    getObject(id_newQuizz)
+
+
     $quizz_done_container.classList.add('invisible')
+    // renderMyQuizz(newQuizz)
 }
 
 
@@ -985,14 +999,10 @@ function clear_allInputs() {
 }
 
 
-function post_newQuizz() {
+function post_newQuizz(){
 
     let newQuizzLocal = newQuizz;
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', newQuizzLocal)
-
-
-
-    
 
     promise.then(successefulPost)
     promise.catch(ErrorPost)
@@ -1002,11 +1012,10 @@ function ErrorPost(e) {
     alert('Não foi possível enviar o novo Quizz ao servidor!')
     console.log(e.response)
 }
-function successefulPost(request) {
-    console.log('Novo Quizz enviado ao servidor com sucesso!')
-    // renderQuizz(request)
 
-    localStorage.setItem(`id_${request.data.title}`, `${request.data.id}`)
+function successefulPost(request) {
+    console.log('Novo Quizz enviado ao servidor com sucesso!');
+    localStorage.setItem(`${request.data.title}`,`${request.data.id}`);
 }
 
 
