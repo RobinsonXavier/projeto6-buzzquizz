@@ -438,6 +438,10 @@ input{
     /* display: none; */
 }
 
+.adjust_header_layout_in_AcessQuizz{
+    margin-top: -90px;
+}
+
 .header_play_quizz{
     height: 227px;
 }

@@ -399,14 +399,9 @@ const $btn_create_quiz_dashed = document.querySelector('.btn-dashed')
 const $btn_create_quiz_circle = document.querySelector('.btn_circle')
 const $btn_create_question = document.querySelector('.btn-create-question')
 
-
-
 $btn_create_quiz_dashed.addEventListener('click', start_create_quizz)
 $btn_create_quiz_circle.addEventListener('click', start_create_quizz)
 $btn_create_question.addEventListener('click', create_question)
-
-
-
 
 let newQuizz;
 let titleG;
@@ -537,13 +532,14 @@ function finalize_quizz() {
 
 }
 
-// INCOMPLETA
 function acess_quizz() {
 
-
     let id_newQuizz = localStorage.getItem(`id_${newQuizz.title}`)
-
     getObject(id_newQuizz)
+
+    let adjust_layout = document.querySelector('play_quizz')
+    adjust_layout.classList.add('adjust_header_layout_in_AcessQuizz')
+
     $quizz_done_container.classList.add('invisible')
 }
 
@@ -1004,8 +1000,6 @@ function ErrorPost(e) {
 }
 function successefulPost(request) {
     console.log('Novo Quizz enviado ao servidor com sucesso!')
-    // renderQuizz(request)
-
     localStorage.setItem(`id_${request.data.title}`, `${request.data.id}`)
 }
 
@@ -1126,9 +1120,10 @@ function validate_hitPercent(hitPercent) {
     return true;
 }
 
-
-function layoutResponsivo(){
-
-
-
+window.addEventListener('resize', responsive_layout);
+window.addEventListener('load', responsive_layout);
+function responsive_layout(){
+    let width = window.screen.width;
+    let percent80_of = width * 0.8;
+    $visualize_quizz.style.width = `${percent80_of}px`
 }
